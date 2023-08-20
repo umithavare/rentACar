@@ -11,9 +11,9 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 public class Brand {
-    @Id
+    @Id // Pk oldugunu gostermek ıcın yazılır
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id otomatik artması icim yazildi
-    @Column(name = "id")
+    @Column(name = "id") // veritabanındaki tablo ile eşlendi
     private int id;
 
     @Column(name = "name")
