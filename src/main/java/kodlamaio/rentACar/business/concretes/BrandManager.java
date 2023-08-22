@@ -5,6 +5,7 @@ import kodlamaio.rentACar.business.requests.CreateBrandRequest;
 import kodlamaio.rentACar.business.requests.UpdateBrandRequest;
 import kodlamaio.rentACar.business.responses.GetAllBrandsResponse;
 import kodlamaio.rentACar.business.responses.GetByIdBrandResponse;
+import kodlamaio.rentACar.business.rules.BrandBusinessRules;
 import kodlamaio.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlamaio.rentACar.dataAccess.abstracts.BrandRepository;
 import kodlamaio.rentACar.entities.concretes.Brand;
@@ -21,6 +22,7 @@ public class BrandManager implements BrandService {
 
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
+    private BrandBusinessRules brandBusinessRules;
 
 
     @Override
@@ -46,6 +48,8 @@ public class BrandManager implements BrandService {
 
     @Override
     public void add(CreateBrandRequest createBrandRequest) {
+
+        this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
 
         // Mapping ile createBrand requesti Brand sınıfına eşliyor boylece veritabanına uygun hale gelıyor
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest,Brand.class);

@@ -1,6 +1,7 @@
 package kodlamaio.rentACar.webApi.controllers;
 
 
+import jakarta.validation.Valid;
 import kodlamaio.rentACar.business.requests.CreateBrandRequest;
 import kodlamaio.rentACar.business.requests.UpdateBrandRequest;
 import kodlamaio.rentACar.business.responses.GetAllBrandsResponse;
@@ -30,9 +31,9 @@ public class BrandsController {
         return brandService.getById(id);
     }
 
-    @PatchMapping()
+    @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void add(CreateBrandRequest createBrandRequest){
+    public void add(@RequestBody() @Valid() CreateBrandRequest createBrandRequest){
         this.brandService.add(createBrandRequest);
     }
 
